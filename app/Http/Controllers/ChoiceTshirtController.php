@@ -14,7 +14,7 @@ class ChoiceTshirtController extends Controller
      */
     public function index()
     {
-        //
+        return view("choiceTshirt.index");
     }
 
     /**
@@ -24,7 +24,7 @@ class ChoiceTshirtController extends Controller
      */
     public function create()
     {
-        //
+        return view("choiceTshirt.create");
     }
 
     /**

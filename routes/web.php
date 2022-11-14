@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ChoiceTshirtController;
+use Intervention\Image\ImageManagerStatic;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,6 +16,9 @@ use App\Http\Controllers\ChoiceTshirtController;
 */
 
 Route::get('/', function () {
+    $img = ImageManagerStatic::make('image.white-t-shirt.jpg');
+    $img ->crop(400,400);
+    $img->save('image.white-t-shirt.jpg');
     return view('welcome');
 });
 Route::resource('choiceTshirt',ChoiceTshirtController::class);
