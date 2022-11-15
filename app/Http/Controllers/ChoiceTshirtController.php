@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\ChoiceTshirt;
 use Illuminate\Http\Request;
+use Intervention\Image\ImageManagerStatic;
 
 class ChoiceTshirtController extends Controller
 {
@@ -14,6 +15,8 @@ class ChoiceTshirtController extends Controller
      */
     public function index()
     {
+
+        
         return view("choiceTshirt.index");
     }
 
@@ -24,7 +27,9 @@ class ChoiceTshirtController extends Controller
      */
     public function create()
     {
-        return view("choiceTshirt.create");
+        $size = ["XS","S","M","L","XL","XXL"];
+        $sourcesImages = ["/image/motif/triangle-multicolor-PNG.png","/image/motif/triangle-noir.png","/image/motif/triangles-multicolors.png"];
+        return view("choiceTshirt.create",["size"=>$size, "sourcesImages"=> $sourcesImages]);
     }
 
     /**
