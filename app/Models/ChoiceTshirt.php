@@ -8,4 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class ChoiceTshirt extends Model
 {
     use HasFactory;
+    protected $fillable = [ "title", "urlimg", "type"];
 }

@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ChoiceTshirtController;
 use Intervention\Image\ImageManagerStatic;
+use Symfony\Component\Console\Question\ChoiceQuestion;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -19,5 +21,9 @@ Route::get('/', function () {
     return $img->response('jpg');
  
 });
+Route::get('/choiceTshirt/result/{motif}',[ChoiceTshirtController::class, 'showImage'])->name('choiceTshirt.result');
+
 Route::resource('choiceTshirt',ChoiceTshirtController::class);
+
+Route::post('/choiceTshirt/show',[ChoiceTshirtController::class, 'tshirt'])->name('choiceTshirt.showImage');
 

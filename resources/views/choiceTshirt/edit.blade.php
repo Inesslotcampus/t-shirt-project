@@ -2,11 +2,25 @@
 @section('content')
 <div class="m-4">
     <div class="bg-gray-50 m-6 p-6">
-        <h1 class="text-xl text-center mb-6 font-semibold ">Créer un nouveau T-shirt</h1>
-        <div class="flex justify-center ">
-            <form method="POST" action="{{ route('choiceTshirt.showImage') }}" enctype="multipart/form-data">
-                @csrf
+        <h1 class="text-xl text-center mb-6 font-semibold ">Modifier un nouveau T-shirt</h1>
+        <div class="flex justify-between ">
+            <div>
+                
+                <div class="flex text-lg"><h2 class="pr-2 ">Taille : </h2>
+                <p>{{$tShirt->title}}</p>
+            </div>
+            <div class="flex text-lg"><h2 class="pr-2 ">Genre : </h2>
+                <p>{{$tShirt->type}}</p>
+            </div>
+            <div class="flex text-lg"><h2 class="pr-2 ">Image : </h2>
+                <img class="w-80" src="/{{$tShirt->urlimg}}">
+            </div>
+            </div>
 
+            <form method="post" action="{{ route('choiceTshirt.update', $tShirt) }}" enctype="multipart/form-data">
+                @csrf
+                @method('PATCH')
+                
                 <div>
                     <h2 class=" text-lg ">Genre</h2>
                     <div class="flex justify-center py-4">
@@ -23,20 +37,20 @@
                         @endforeach
 
                     </div>
-
+                   
                     <h2 class=" text-lg mt-4 ">Motifs </h2>
                     <div class="flex justify-center">
                         <div>
-                            <ul class=" m-10 max-w-md mx-auto">
-                                @foreach($sourcesImages as $sourceOneImage)
-                                <li class="relative">
-                                    <input class="sr-only peer" type="radio" value={{$sourceOneImage}} name="type" id={{$sourceOneImage}}>
-                                    <label class="my-2 w-32 h-32 flex p-5 bg-white border border-gray-300 rounded-lg cursor-pointer focus:outline-none hover:bg-gray-50 peer-checked:ring-black peer-checked:ring-2 peer-checked:border-transparent" for={{$sourceOneImage}}>
-                                    <img src=/image/motif/{{$sourceOneImage}}>
-                                    </label>
-                                </li>
-                                @endforeach
-                                <li>
+                        <ul class=" m-10 max-w-md mx-auto">
+                            @foreach($sourcesImages as $sourceOneImage)
+                            <li class="relative">
+                                <input class="sr-only peer" type="radio" value={{$sourceOneImage}} name="type" id={{$sourceOneImage}}>
+                                <label class="my-2 w-32 h-32 flex p-5 bg-white border border-gray-300 rounded-lg cursor-pointer focus:outline-none hover:bg-gray-50 peer-checked:ring-black peer-checked:ring-2 peer-checked:border-transparent" for={{$sourceOneImage}}>
+                                <img src=/{{$sourceOneImage}}>
+                                </label>
+                            </li>
+                            @endforeach
+                            <li>
                                     <div class="flex items-center justify-center w-full">
                                         <label for="dropzone-file" class="flex flex-col items-center justify-center w-full w-32 h-32 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
                                             <div class="flex flex-col items-center justify-center pt-5 pb-6">
@@ -46,11 +60,11 @@
                                                 <p class="mb-2 text-sm text-gray-800 dark:text-gray-900"><span class="font-semibold">Click to upload</span></p>
                                                 
                                             </div>
-                                            <input name="upload" id="dropzone-file" type="file" class="hidden" />
+                                            <input id="dropzone-file" type="file" name="type" class="hidden" />
                                         </label>
                                     </div>
                                 </li>
-                            </ul>
+                        </ul>
                         </div>
                         <div> <img class="w-80 mx-8 my-14" src="/image/t-shirt-blanc.jpg"></div>
                     </div>
