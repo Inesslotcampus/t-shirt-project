@@ -3,7 +3,7 @@
 
 <div class="flex justify-center bg-gray-200 mx-32">
     
-
+<a href="{{ route('pdf.displayTshirt', $request->type)}}">Lien pdf</a>
    <img src="{{ route('choiceTshirt.result', $request->type)}}" class="w-80 mr-4">
     
     <form method="POST" action="{{ route('choiceTshirt.store') }}" enctype="multipart/form-data">

@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ChoiceTshirtController;
 use Intervention\Image\ImageManagerStatic;
 use Symfony\Component\Console\Question\ChoiceQuestion;
+use App\Http\Controllers\PdfController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,8 +23,9 @@ Route::get('/', function () {
  
 });
 Route::get('/choiceTshirt/result/{motif}',[ChoiceTshirtController::class, 'showImage'])->name('choiceTshirt.result');
-
+Route::get('/choiceTshirt/show/{motif}',[PdfController::class, 'downloadPDF'])->name('pdf.displayTshirt');
 Route::resource('choiceTshirt',ChoiceTshirtController::class);
 
 Route::post('/choiceTshirt/show',[ChoiceTshirtController::class, 'tshirt'])->name('choiceTshirt.showImage');
+
 
