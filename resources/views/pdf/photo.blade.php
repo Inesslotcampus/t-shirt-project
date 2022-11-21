@@ -3,8 +3,7 @@
 
 <div class="flex justify-center bg-gray-200 mx-32">
     
-
-   <img src="{{ route('choiceTshirt.result', $motifs[0])}}" class="w-80 mr-4">
+   <h2>{{$img[0]}}</h2>
     
     
 </div>

@@ -3,9 +3,10 @@
 <div class="m-4">
     <div class="bg-gray-50 m-6 p-6">
         <h1 class="text-xl text-center mb-6 font-semibold ">Modifier un nouveau T-shirt</h1>
+        
         <div class="flex justify-between ">
+
             <div>
-                
                 <div class="flex text-lg"><h2 class="pr-2 ">Taille : </h2>
                 <p>{{$tShirt->title}}</p>
             </div>
@@ -15,6 +16,9 @@
             <div class="flex text-lg"><h2 class="pr-2 ">Image : </h2>
                 <img class="w-80" src="/{{$tShirt->urlimg}}">
             </div>
+            <button class=" m-2 bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow">
+            <a href="{{ route('pdf.displayTshirt', $url ) }} ">Lien pdf</a>
+</button>
             </div>
 
             <form method="post" action="{{ route('choiceTshirt.update', $tShirt) }}" enctype="multipart/form-data">

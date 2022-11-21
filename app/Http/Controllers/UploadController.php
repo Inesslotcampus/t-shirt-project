@@ -10,20 +10,11 @@ use Illuminate\Support\Str;
 class UploadController extends Controller
 {
     public function uploidImage(string $uploidMotif){
-          //upload image
-          
-          $nameTshirt = Str::random(6);
-          //$motif = ImageManagerStatic::make($uploidMotif);
-          $motif = ImageManagerStatic::make('');
-          dd($motif);
-          
-          $motif->save('image/motif' . $nameTshirt . '.jpg');
-
-
-  
+         
           //affichage à la vollée
+          
   
-          $motif = 'image/motif/' . $motif;
+          $motif =  storage_path('app/public/image/motif/'.$uploidMotif);
           $logo = ImageManagerStatic::make($motif)->resize(200, 200);
           $img = ImageManagerStatic::make('image/t-shirt-blanc.jpg')->resize(900, 900);
           $img->insert($logo, 'center');

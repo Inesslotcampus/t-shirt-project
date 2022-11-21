@@ -8,8 +8,7 @@ use Intervention\Image\ImageManagerStatic;
 use Nette\Utils\Random;
 use Illuminate\Support\Str;
 use Barryvdh\DomPDF\Facade\Pdf;
-
-
+use Illuminate\Support\Facades\Storage;
 
 class ChoiceTshirtController extends Controller
 {
@@ -52,7 +51,7 @@ class ChoiceTshirtController extends Controller
     public function showImage(string $motif)
     {
         //affichage à la vollée
-        $motif = 'image/motif/' . $motif;
+        $motif =  storage_path('app/public/image/motif/'. $motif);
         $logo = ImageManagerStatic::make($motif)->resize(200, 200);
         $img = ImageManagerStatic::make('image/t-shirt-blanc.jpg')->resize(900, 900);
         $img->insert($logo, 'center');
@@ -61,8 +60,20 @@ class ChoiceTshirtController extends Controller
 
     public function tshirt(Request $request)
     {
+       $input = $request->all();
+       
+       if($request->hasFile('upload')){
+           $destination_path ='public/image/motif';
+           $img = $request->file('upload');
+           $image_name = $img->getClientOriginalName();
+           $path =$request->file('upload')->storeAs($destination_path,$image_name);
 
-        return view("choiceTshirt.tShirtDetail", ["request" => $request]);
+           $input['upload']= $image_name;
+           
+           
+       }
+        
+        return view("choiceTshirt.tShirtDetail", ["input"=>$input]);
     }
 
     public function store(Request $request)
@@ -76,13 +87,13 @@ class ChoiceTshirtController extends Controller
 
 
         $motif = $request->pathImg;
-        $motif = 'image/motif/' . $motif;
+       
+        $motif =  storage_path('app/public/image/motif/'. $motif);
         $nameTshirt = Str::random(6);
         $logo = ImageManagerStatic::make($motif)->resize(700, 700);
         $img = ImageManagerStatic::make('image/t-shirt-blanc.jpg');
         $img->insert($logo, 'center');
         $img->save('image/create-T-shirt/t-shirt-' . $nameTshirt . '.jpg');
-
 
         ChoiceTshirt::create([
             "title" => $request->size,
@@ -91,8 +102,6 @@ class ChoiceTshirtController extends Controller
         ]);
 
         $arrayOfTshirt = ChoiceTshirt::latest()->get();
-
-
         return view("choiceTshirt.index", compact("arrayOfTshirt"));
     }
 
@@ -106,12 +115,14 @@ class ChoiceTshirtController extends Controller
      */
     public function show(ChoiceTshirt $choiceTshirt)
     {
+        
+        $url=$choiceTshirt->urlimg;
         $size = ["XS", "S", "M", "L", "XL", "XXL"];
         $sourcesImages = [
             "image/motif/triangle-multicolor-PNG.png",
             "image/motif/triangle-noir.png"
         ];
-        return view("choiceTshirt.edit", ["size" => $size, "sourcesImages" => $sourcesImages, "tShirt" => $choiceTshirt]);
+        return view("choiceTshirt.edit", ["size" => $size, "sourcesImages" => $sourcesImages, "tShirt" => $choiceTshirt, "url"=>$url]);
     }
 
     /**
