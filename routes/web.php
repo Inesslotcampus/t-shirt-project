@@ -5,6 +5,7 @@ use App\Http\Controllers\ChoiceTshirtController;
 use Intervention\Image\ImageManagerStatic;
 use Symfony\Component\Console\Question\ChoiceQuestion;
 use App\Http\Controllers\PdfController;
+use App\Http\Controllers\UploadController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,10 +23,12 @@ Route::get('/', function () {
     return $img->response('jpg');
  
 });
+
 Route::get('/choiceTshirt/result/{motif}',[ChoiceTshirtController::class, 'showImage'])->name('choiceTshirt.result');
 Route::get('/choiceTshirt/show/{motif}',[PdfController::class, 'downloadPDF'])->name('pdf.displayTshirt');
 Route::resource('choiceTshirt',ChoiceTshirtController::class);
 
 Route::post('/choiceTshirt/show',[ChoiceTshirtController::class, 'tshirt'])->name('choiceTshirt.showImage');
+Route::get('/choiceTshirt/result/{motif}',[UploadController::class, 'uploidImage'])->name('choiceTshirt.uploadResult');
 
 

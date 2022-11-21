@@ -52,9 +52,6 @@ class ChoiceTshirtController extends Controller
     public function showImage(string $motif)
     {
         //affichage à la vollée
-        
-
-
         $motif = 'image/motif/' . $motif;
         $logo = ImageManagerStatic::make($motif)->resize(200, 200);
         $img = ImageManagerStatic::make('image/t-shirt-blanc.jpg')->resize(900, 900);
@@ -70,7 +67,6 @@ class ChoiceTshirtController extends Controller
 
     public function store(Request $request)
     {
-
 
         $this->validate($request, [
             'size' => 'required|string',
@@ -151,7 +147,6 @@ class ChoiceTshirtController extends Controller
         $img = ImageManagerStatic::make('image/t-shirt-blanc.jpg');
         $img->insert($logo, 'center');
         $url = $choiceTshirt->urlimg;
-
 
         $img->save($url);
         $choiceTshirt->update([

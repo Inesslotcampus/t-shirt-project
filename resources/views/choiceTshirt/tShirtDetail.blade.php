@@ -2,14 +2,19 @@
 @section('content')
 
 <div class="flex justify-center bg-gray-200 mx-32">
+
+
     
-<a href="{{ route('pdf.displayTshirt', $request->type)}}">Lien pdf</a>
-   <img src="{{ route('choiceTshirt.result', $request->type)}}" class="w-80 mr-4">
-    
+    @if(count($request->file())>0)
+    <img src="{{ route('choiceTshirt.uploadResult', $request->file('upload'))}}" class="w-80 mr-4">
+    @else
+    <a href="{{ route('pdf.displayTshirt', $request->type)}}">Lien pdf</a>
+    <img src="{{ route('choiceTshirt.result', $request->type)}}" class="w-80 mr-4">
+    @endif
     <form method="POST" action="{{ route('choiceTshirt.store') }}" enctype="multipart/form-data">
         @csrf
         
-        <input name="pathImg" type="hidden" value="{{$request->type}}" />
+        <!-- <input name="pathImg" type="hidden" value="{{$request->type}}" /> -->
         <input name="genre" type="hidden" value="{{$request->genre}}" />
         <input name="size" type="hidden" value="{{$request->size}}" />
 
