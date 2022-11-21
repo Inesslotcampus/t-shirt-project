@@ -97,7 +97,7 @@ class ChoiceTshirtController extends Controller
 
         ChoiceTshirt::create([
             "title" => $request->size,
-            "urlimg" => "image/create-T-shirt/t-shirt-" . $nameTshirt . '.jpg',
+            "urlimg" => "t-shirt-" . $nameTshirt . '.jpg',
             "type" => $request->genre,
         ]);
 
