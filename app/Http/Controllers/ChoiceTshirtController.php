@@ -93,6 +93,12 @@ class ChoiceTshirtController extends Controller
         $logo = ImageManagerStatic::make($motif)->resize(700, 700);
         $img = ImageManagerStatic::make('image/t-shirt-blanc.jpg');
         $img->insert($logo, 'center');
+        $img->text('© 2016-2022 positronX.io - All Rights Reserved', 1000, 2000, function($font) { 
+            $font->size(1000);  
+            $font->align('center');  
+            $font->valign('bottom');  
+            $font->angle(90);  
+        });  
         $img->save('image/create-T-shirt/t-shirt-' . $nameTshirt . '.jpg');
 
         ChoiceTshirt::create([

@@ -2,7 +2,7 @@
 @section('content')
 <div class="m-4">
     <div class="bg-gray-50 m-6 p-6">
-        <h1 class="text-xl text-center mb-6 font-semibold ">Modifier un nouveau T-shirt</h1>
+        <h1 class="text-xl text-center mb-6 font-semibold ">Modifier un T-shirt</h1>
         
         <div class="flex justify-between ">
 

@@ -1,12 +1,8 @@
-@extends('layout')
-@section('content')
+<img  src="image/create-T-shirt/{{$motif}}">
 
-<div class="flex justify-center bg-gray-200 mx-32">
-    
-<img src="/image/create-T-shirt/{{$motif}}">
-   <h2></h2>
-   <img src="/image/create-T-shirt/t-shirt-36XurY.jpg">
-    
-</div>
-
-@stop
+<style>
+    img{
+        width: 500px;
+        height: 500px;
+    }
+</style>
