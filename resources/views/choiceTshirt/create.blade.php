@@ -28,14 +28,8 @@
                     <div class="flex justify-center">
                         <div>
                             <ul class=" m-10 max-w-md mx-auto">
-                                @foreach($sourcesImages as $sourceOneImage)
-                                <li class="relative">
-                                    <input class="sr-only peer" type="radio" value={{$sourceOneImage}} name="type" id={{$sourceOneImage}}>
-                                    <label class="my-2 w-32 h-32 flex p-5 bg-white border border-gray-300 rounded-lg cursor-pointer focus:outline-none hover:bg-gray-50 peer-checked:ring-black peer-checked:ring-2 peer-checked:border-transparent" for={{$sourceOneImage}}>
-                                    <img src=/image/motif/{{$sourceOneImage}}>
-                                    </label>
-                                </li>
-                                @endforeach
+                               
+                            
                                 <li>
                                     <div class="flex items-center justify-center w-full">
                                         <label for="dropzone-file" class="flex flex-col items-center justify-center w-full w-32 h-32 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">

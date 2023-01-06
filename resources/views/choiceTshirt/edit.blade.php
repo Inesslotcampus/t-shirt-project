@@ -27,34 +27,13 @@
                 @method('PATCH')
                 
                 <div>
-                    <h2 class=" text-lg ">Genre</h2>
-                    <div class="flex justify-center py-4">
-                        <input class="form-check-input appearance-none rounded-full h-4 w-4 border border-gray-300 bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer" type="radio" id="woman" name="genre" value="woman">
-                        <label for="title" class="pl-4 pr-24">Femme </label><br />
-                        <input class="form-check-input appearance-none rounded-full h-4 w-4 border border-gray-300 bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer" type="radio" id="man" name="genre" value="man">
-                        <label for="title" class="pl-4 pr-24">Homme </label><br />
-                    </div>
-                    <h2 class=" text-lg ">Taille </h2>
-                    <div class="flex justify-between py-4">
-                        @foreach($size as $onesize)
-                        <input class="form-check-input appearance-none rounded-full h-4 w-4 border border-gray-300 bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer" type="radio" id={{$onesize}} name="size" value={{$onesize}}>
-                        <label for="title" class="pl-4 pr-24">{{$onesize}} </label>
-                        @endforeach
-
-                    </div>
-                   
-                    <h2 class=" text-lg mt-4 ">Motifs </h2>
+                 
                     <div class="flex justify-center">
                         <div>
                         <ul class=" m-10 max-w-md mx-auto">
-                            @foreach($sourcesImages as $sourceOneImage)
-                            <li class="relative">
-                                <input class="sr-only peer" type="radio" value={{$sourceOneImage}} name="type" id={{$sourceOneImage}}>
-                                <label class="my-2 w-32 h-32 flex p-5 bg-white border border-gray-300 rounded-lg cursor-pointer focus:outline-none hover:bg-gray-50 peer-checked:ring-black peer-checked:ring-2 peer-checked:border-transparent" for={{$sourceOneImage}}>
-                                <img src=/{{$sourceOneImage}}>
-                                </label>
-                            </li>
-                            @endforeach
+                        
+                            <input id="imgEdit" name="imgEdit" type="hidden" value="{{$tShirt->urlimg}}">
+                            
                             <li>
                                     <div class="flex items-center justify-center w-full">
                                         <label for="dropzone-file" class="flex flex-col items-center justify-center w-full w-32 h-32 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">

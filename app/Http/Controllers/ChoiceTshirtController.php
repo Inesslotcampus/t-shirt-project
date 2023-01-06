@@ -20,8 +20,6 @@ class ChoiceTshirtController extends Controller
     public function index()
     {
         $arrayOfTshirt = ChoiceTshirt::latest()->get();
-
-
         return view("choiceTshirt.index", compact("arrayOfTshirt"));
     }
 
@@ -32,7 +30,6 @@ class ChoiceTshirtController extends Controller
      */
     public function create()
     {
-
         $size = ["XS", "S", "M", "L", "XL", "XXL"];
         $sourcesImages = [
             "triangle-multicolor-PNG.png",
@@ -69,10 +66,8 @@ class ChoiceTshirtController extends Controller
            $path =$request->file('upload')->storeAs($destination_path,$image_name);
 
            $input['upload']= $image_name;
-           
-           
        }
-        
+
         return view("choiceTshirt.tShirtDetail", ["input"=>$input]);
     }
 
@@ -85,9 +80,7 @@ class ChoiceTshirtController extends Controller
             "genre" => 'required',
         ]);
 
-
         $motif = $request->pathImg;
-       
         $motif =  storage_path('app/public/image/motif/'. $motif);
         $nameTshirt = Str::random(6);
         $logo = ImageManagerStatic::make($motif)->resize(700, 700);
@@ -100,13 +93,12 @@ class ChoiceTshirtController extends Controller
             $font->angle(90);  
         });  
         $img->save('image/create-T-shirt/t-shirt-' . $nameTshirt . '.jpg');
-
         ChoiceTshirt::create([
             "title" => $request->size,
-            "urlimg" => "t-shirt-" . $nameTshirt . '.jpg',
+            "urlimg" => 't-shirt-' . $nameTshirt . '.jpg',
             "type" => $request->genre,
         ]);
-
+    
         $arrayOfTshirt = ChoiceTshirt::latest()->get();
         return view("choiceTshirt.index", compact("arrayOfTshirt"));
     }
@@ -120,15 +112,21 @@ class ChoiceTshirtController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show(ChoiceTshirt $choiceTshirt)
-    {
+    { 
         
-        $url=$choiceTshirt->urlimg;
-        $size = ["XS", "S", "M", "L", "XL", "XXL"];
+        $urlOld=$choiceTshirt->urlimg;
+        $historique =[];
+        
+        array_push( $historique, $urlOld);
+        $url=last($historique);
+        
+        
+
         $sourcesImages = [
             "image/motif/triangle-multicolor-PNG.png",
             "image/motif/triangle-noir.png"
         ];
-        return view("choiceTshirt.edit", ["size" => $size, "sourcesImages" => $sourcesImages, "tShirt" => $choiceTshirt, "url"=>$url]);
+        return view("choiceTshirt.edit", [ "sourcesImages" => $sourcesImages, "tShirt" => $choiceTshirt, "url"=>$url]);
     }
 
     /**
@@ -151,12 +149,15 @@ class ChoiceTshirtController extends Controller
      */
     public function update(Request $request, ChoiceTshirt $choiceTshirt)
     {
+        $oldImg = $request->imgEdit;
+        
         $this->validate($request, [
-            'size' => 'required|string',
-            "type" => 'required',
-            "genre" => 'required',
+            "imgEdit"=>'required'
         ]);
         $motif = $request->type;
+        dd($oldImg);
+       
+        $historique =[];
 
         //$motif = substr($motif,1);
 
@@ -184,11 +185,7 @@ class ChoiceTshirtController extends Controller
     {
         $choiceTshirt = ChoiceTshirt::find($choiceTshirt->id);
         $image_path = "/images/filename.ext";  // Value is not URL but directory file path
-
-
         $choiceTshirt->delete();
-
-
         return redirect(route('choiceTshirt.index'));
     }
 }
