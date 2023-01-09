@@ -15,7 +15,7 @@
             </div>
             <div class="flex text-lg"><h2 class="pr-2 ">Image : </h2>
             
-                <img class="w-80" src="/image/create-T-shirt/{{$tShirt->urlimg}}">
+                 <img class="w-80" src="/image/create-T-shirt/{{$tShirt->urlimg}}"> 
             </div>
             <button class=" m-2 bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow">
             <a href="{{ route('pdf.displayTshirt', $url ) }} ">Lien pdf</a>
@@ -27,7 +27,6 @@
                 @method('PATCH')
                 
                 <div>
-                 
                     <div class="flex justify-center">
                         <div>
                         <ul class=" m-10 max-w-md mx-auto">
@@ -44,7 +43,7 @@
                                                 <p class="mb-2 text-sm text-gray-800 dark:text-gray-900"><span class="font-semibold">Click to upload</span></p>
                                                 
                                             </div>
-                                            <input id="dropzone-file" type="file" name="type" class="hidden" />
+                                            <input id="dropzone-file" type="file" name="upload" class="hidden" />
                                         </label>
                                     </div>
                                 </li>

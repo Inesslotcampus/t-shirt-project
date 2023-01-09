@@ -121,12 +121,8 @@ class ChoiceTshirtController extends Controller
         $url=last($historique);
         
         
-
-        $sourcesImages = [
-            "image/motif/triangle-multicolor-PNG.png",
-            "image/motif/triangle-noir.png"
-        ];
-        return view("choiceTshirt.edit", [ "sourcesImages" => $sourcesImages, "tShirt" => $choiceTshirt, "url"=>$url]);
+       
+        return view("choiceTshirt.edit", [  "tShirt" => $choiceTshirt, "url"=>$url]);
     }
 
     /**
@@ -154,25 +150,48 @@ class ChoiceTshirtController extends Controller
         $this->validate($request, [
             "imgEdit"=>'required'
         ]);
-        $motif = $request->type;
-        dd($oldImg);
-       
+    
         $historique =[];
 
-        //$motif = substr($motif,1);
+        array_push( $historique,$oldImg);
+        
+        
+        /* upload de l'image */
+        if($request->hasFile('upload')){
+            $destination_path ='public/image/motif';
+            $img = $request->file('upload');
+            $image_name = $img->getClientOriginalName();
+            $path =$request->file('upload')->storeAs($destination_path,$image_name);
+ 
+            $input['upload']= $image_name;
+            
+        }
+        $path =  storage_path('app/public/image/motif/'. $image_name);
+            $img = ImageManagerStatic::make('image/t-shirt-blanc.jpg');
+            $motif = ImageManagerStatic::make($path)->resize(700, 700);
+            $img->insert($motif, 'center');
+            $img->insert($motif, 'center');
+            $img->save('image/create-T-shirt/t-shirt-' . $image_name . '.jpg');
+            
 
-        $logo = ImageManagerStatic::make($motif)->resize(700, 700);
-        $img = ImageManagerStatic::make('image/t-shirt-blanc.jpg');
-        $img->insert($logo, 'center');
-        $url = $choiceTshirt->urlimg;
+            $newTshirt= 't-shirt-' . $image_name . '.jpg';
 
-        $img->save($url);
-        $choiceTshirt->update([
-            "title" => $request->size,
-            "type" => $request->genre,
+            array_push( $historique,$newTshirt);
+
+            $choiceTshirt->update([
+            "urlimg" =>  $historique,
         ]);
+            
+            return $img->response('jpg');
 
-        return $img->response('jpg');
+        // $url = $choiceTshirt->urlimg;
+
+        // $img->save($url);
+
+        /* ajouter le tableau avec plusieurs valeurs à la base de donnée à la place*/ 
+        
+
+        // return $img->response('jpg');
     }
 
     /**
