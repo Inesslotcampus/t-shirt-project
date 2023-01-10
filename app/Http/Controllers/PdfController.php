@@ -10,8 +10,9 @@ class PdfController extends Controller
     public function downloadPDF(string $motif){
         
         
-        $pdf = Pdf::loadView('pdf.photo', compact('motif'));
+        $array=explode(",",$motif); 
+        $pdf = Pdf::loadView('pdf.photo', compact('array'));
 
-        return $pdf->download('invoice.pdf');
+        return $pdf->download('t-shirt.pdf');
     }
 }

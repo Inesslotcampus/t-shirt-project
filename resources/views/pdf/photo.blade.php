@@ -1,4 +1,9 @@
-<img  src="image/create-T-shirt/{{$motif}}">
+
+@foreach ($array as $historique )
+<img  src="image/create-T-shirt/{{$historique}}"> 
+@endforeach
+
+
 
 <style>
     img{
