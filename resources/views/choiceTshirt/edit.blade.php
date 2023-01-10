@@ -6,6 +6,11 @@
         
         <div class="flex justify-between ">
 
+            @foreach ($historique as $display)
+            {{$display}}
+                
+            @endforeach
+                
             <div>
                 <div class="flex text-lg"><h2 class="pr-2 ">Taille : </h2>
                 <p>{{$tShirt->title}}</p>
@@ -15,10 +20,10 @@
             </div>
             <div class="flex text-lg"><h2 class="pr-2 ">Image : </h2>
             
-                 <img class="w-80" src="/image/create-T-shirt/{{$tShirt->urlimg}}"> 
+                 <img class="w-80" src="/image/create-T-shirt/{{$last}}"> 
             </div>
             <button class=" m-2 bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow">
-            <a href="{{ route('pdf.displayTshirt', $url ) }} ">Lien pdf</a>
+            <a href="{{ route('pdf.displayTshirt', $last ) }} ">Lien pdf</a>
 </button>
             </div>
 

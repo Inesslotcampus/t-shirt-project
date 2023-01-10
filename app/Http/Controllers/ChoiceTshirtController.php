@@ -115,14 +115,11 @@ class ChoiceTshirtController extends Controller
     { 
         
         $urlOld=$choiceTshirt->urlimg;
-        $historique =[];
+        $array=explode(",",$urlOld); 
         
-        array_push( $historique, $urlOld);
-        $url=last($historique);
-        
-        
-       
-        return view("choiceTshirt.edit", [  "tShirt" => $choiceTshirt, "url"=>$url]);
+        $last=last($array);
+      
+        return view("choiceTshirt.edit", [  "tShirt" => $choiceTshirt, "last"=>$last, "historique"=>$array]);
     }
 
     /**
@@ -146,16 +143,13 @@ class ChoiceTshirtController extends Controller
     public function update(Request $request, ChoiceTshirt $choiceTshirt)
     {
         $oldImg = $request->imgEdit;
+        // $historique= ltrim($oldImg, $oldImg[0]);
+        //     $oldImg= substr_replace($oldImg, "", -1) ;
         
         $this->validate($request, [
             "imgEdit"=>'required'
         ]);
     
-        $historique =[];
-
-        array_push( $historique,$oldImg);
-        
-        
         /* upload de l'image */
         if($request->hasFile('upload')){
             $destination_path ='public/image/motif';
@@ -175,9 +169,9 @@ class ChoiceTshirtController extends Controller
             
 
             $newTshirt= 't-shirt-' . $image_name . '.jpg';
-
-            array_push( $historique,$newTshirt);
-
+            $historique =$oldImg .',' .$newTshirt;
+            
+           
             $choiceTshirt->update([
             "urlimg" =>  $historique,
         ]);
